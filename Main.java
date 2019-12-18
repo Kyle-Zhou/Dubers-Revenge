@@ -8,7 +8,7 @@ public class Main {
       for(int j = 0; j < 25; j++) {
         int choice = random.nextInt(100)+1;
         if(choice < 95) map[i][j] = 1;
-        else map[i][j] = 2;//doesnt work
+        else map[i][j] = 2;
       }
     }
 
