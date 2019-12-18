@@ -16,37 +16,41 @@ import java.awt.event.MouseEvent;
 class Map extends JFrame {
 
   //class variable (non-static)
-  static int GridToScreenRatio;
+  static int maxX, maxY, GridToScreenRatio;
   static double x, y;
   private int[][] map;
   static GamePanel gamePanel;
 
-  Map(String title, int[][] map) {
+  Map(String title, int[][] map2) {
 
     super(title);
-    map = map;
+    map = map2;
     // Set the frame to full screen 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+
+    this.maxX = Toolkit.getDefaultToolkit().getScreenSize().width;
+    this.maxY = Toolkit.getDefaultToolkit().getScreenSize().height;
     // this.setUndecorated(true);  //Set to true to remove title bar
     //frame.setResizable(false);
-    GridToScreenRatio = (map.length) / (map[0].length + 1);
-    gamePanel = new GamePanel();
-    this.add(new GamePanel());
+    GridToScreenRatio = (maxY) / (map.length + 1);
+    //gamePanel = new GamePanel();
+    //this.add(new GamePanel());
 
-    MyKeyListener keyListener = new MyKeyListener();
-    this.addKeyListener(keyListener);
+    //MyKeyListener keyListener = new MyKeyListener();
+    //this.addKeyListener(keyListener);
 
-    MyMouseListener mouseListener = new MyMouseListener();
-    this.addMouseListener(mouseListener);
+   // MyMouseListener mouseListener = new MyMouseListener();
+    //this.addMouseListener(mouseListener);
 
     this.requestFocusInWindow(); //make sure the frame has focus   
 
     this.setVisible(true);
 
+    this.add(new GamePanel());
     //Start the game loop in a separate thread
-    Thread t = new Thread(new Runnable() { public void run() { animate(); }}); //start the gameLoop 
-    t.start();
+    //Thread t = new Thread(new Runnable() { public void run() { animate(); }}); //start the gameLoop
+    //t.start();
 
   }
 
@@ -70,18 +74,24 @@ class Map extends JFrame {
 
   // Inner class for the the game area - This is where all the drawing of the screen occurs
   private class GamePanel extends JPanel {
+
+    GamePanel() {
+      addMouseListener(new MyMouseListener());
+      addKeyListener(new MyKeyListener());
+    }
+
     public void paintComponent(Graphics g) {
       super.paintComponent(g); //required
       setDoubleBuffered(true);
-      g.setColor(Color.BLUE); //There are many graphics commands that Java can use
-      g.fillRect((int)x, (int)y, 50, 50); //notice the x,y variables that we control from our animate method      
+      //g.setColor(Color.BLUE); //There are many graphics commands that Java can use
+      //g.fillRect((int)x, (int)y, 50, 50); //notice the x,y variables that we control from our animate method
 
       for(int i = 0; i < 25; i++) {
         for(int j = 0; j < 25; j++) {
           if(map[i][j] == 1) {
             g.setColor(Color.green);
             g.fillRect(j * GridToScreenRatio, i * GridToScreenRatio, GridToScreenRatio, GridToScreenRatio);
-          } else if(map[i][j] == 2) {
+          } else {//if(map[i][j] == 2) {
             g.setColor(Color.cyan);
             g.fillRect(j * GridToScreenRatio, i * GridToScreenRatio, GridToScreenRatio, GridToScreenRatio);
           }
