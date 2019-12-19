@@ -20,8 +20,10 @@ class Map extends JFrame {
   static double x, y;
   private int[][] map;
   static GamePanel gamePanel;
-
-  Human duber = new Human(50,50,15,15,15);
+  
+  Human duber = new Human(Toolkit.getDefaultToolkit().getScreenSize().width / 2, 
+                          Toolkit.getDefaultToolkit().getScreenSize().height / 2, 
+                          100, 5, 1);
   
   Map(String title, int[][] map2) {
 
@@ -33,6 +35,7 @@ class Map extends JFrame {
 
     this.maxX = Toolkit.getDefaultToolkit().getScreenSize().width;
     this.maxY = Toolkit.getDefaultToolkit().getScreenSize().height;
+    
     // this.setUndecorated(true);  //Set to true to remove title bar
     //frame.setResizable(false);
     GridToScreenRatio = (maxY) / (map.length + 1);
@@ -56,6 +59,7 @@ class Map extends JFrame {
 
   }
 
+  
   public void refresh() {
     this.repaint();
   }
@@ -77,6 +81,9 @@ class Map extends JFrame {
   // Inner class for the the game area - This is where all the drawing of the screen occurs
   private class GamePanel extends JPanel {
 
+    
+    
+    
     GamePanel() {
       addMouseListener(new MyMouseListener());
       addKeyListener(new MyKeyListener());
@@ -102,6 +109,7 @@ class Map extends JFrame {
         }
       }
     duber.draw(g);
+    duber.move();
     }
     
   }
@@ -117,18 +125,17 @@ class Map extends JFrame {
 
       if (KeyEvent.getKeyText(e.getKeyCode()).equals("A")) {  //If 'A' is pressed
         System.out.println("YIKES A KEY!");
-        duber.xDirection = -5;
+        duber.xDirection = -duber.speed;
       } else if (KeyEvent.getKeyText(e.getKeyCode()).equals("S")) {  //If 'S' is pressed
         System.out.println("YIKES S KEY!");
-        duber.yDirection = 5;
+        duber.yDirection = duber.speed;
       } else if (KeyEvent.getKeyText(e.getKeyCode()).equals("D")) {  //If 'D' is pressed
         System.out.println("YIKES D KEY!");
-        duber.xDirection = 5;
+        duber.xDirection = duber.speed;
       } else if (KeyEvent.getKeyText(e.getKeyCode()).equals("W")) {  //If 'W' is pressed
         System.out.println("YIKES W KEY!");
-        duber.yDirection = -5;
+        duber.yDirection = -duber.speed;
       }
-      duber.move();
     }
     
     public void keyReleased(KeyEvent e) {
