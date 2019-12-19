@@ -23,7 +23,7 @@ class Map extends JFrame {
   
   Human duber = new Human(Toolkit.getDefaultToolkit().getScreenSize().width / 2, 
                           Toolkit.getDefaultToolkit().getScreenSize().height / 2, 
-                          100, 5, 1);
+                          100, 5, 2);
   
   Zombie zombie = new Zombie(100, 100, 100, 50, 1);
   
@@ -110,7 +110,7 @@ class Map extends JFrame {
           } 
         }
       }
-      zombie.draw(g);
+    zombie.draw(g);
     duber.draw(g);
     duber.move();
       if ((zombie.xCord >= duber.xCord) && (zombie.yCord >= duber.yCord)) { //Replace coordinates with Human coordinates.
@@ -147,16 +147,12 @@ class Map extends JFrame {
       //System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
 
       if (KeyEvent.getKeyText(e.getKeyCode()).equals("A")) {  //If 'A' is pressed
-        System.out.println("YIKES A KEY!");
         duber.xDirection = -duber.speed;
       } else if (KeyEvent.getKeyText(e.getKeyCode()).equals("S")) {  //If 'S' is pressed
-        System.out.println("YIKES S KEY!");
         duber.yDirection = duber.speed;
       } else if (KeyEvent.getKeyText(e.getKeyCode()).equals("D")) {  //If 'D' is pressed
-        System.out.println("YIKES D KEY!");
         duber.xDirection = duber.speed;
       } else if (KeyEvent.getKeyText(e.getKeyCode()).equals("W")) {  //If 'W' is pressed
-        System.out.println("YIKES W KEY!");
         duber.yDirection = -duber.speed;
       }
     }
