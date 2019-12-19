@@ -12,7 +12,7 @@ public class Main {
       }
     }
 
-    Map panel = new Map("Our Game", map);
+    Map panel = new Map("Duber\'s Revenge", map);
     while(true) {
       panel.refresh();
     }
