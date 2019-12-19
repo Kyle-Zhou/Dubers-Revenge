@@ -117,21 +117,38 @@ class Map extends JFrame {
 
       if (KeyEvent.getKeyText(e.getKeyCode()).equals("A")) {  //If 'A' is pressed
         System.out.println("YIKES A KEY!");
-        duber.left();
+        duber.xDirection = -5;
       } else if (KeyEvent.getKeyText(e.getKeyCode()).equals("S")) {  //If 'S' is pressed
         System.out.println("YIKES S KEY!");
-        duber.down();
+        duber.yDirection = 5;
       } else if (KeyEvent.getKeyText(e.getKeyCode()).equals("D")) {  //If 'D' is pressed
         System.out.println("YIKES D KEY!");
-        duber.right();
+        duber.xDirection = 5;
       } else if (KeyEvent.getKeyText(e.getKeyCode()).equals("W")) {  //If 'W' is pressed
         System.out.println("YIKES W KEY!");
-        duber.up();
+        duber.yDirection = -5;
       }
+      duber.move();
     }
-
+    
     public void keyReleased(KeyEvent e) {
-    }
+      
+    if(e.getKeyChar() == 'a' ){    //Good time to use a Switch statement
+      System.out.println("left");
+      duber.xDirection=0;
+    } else if(e.getKeyChar() == 's' ){
+      System.out.println("down");
+      duber.yDirection=0;
+    } else if(e.getKeyChar() == 'd' ){
+      System.out.println("right");
+      duber.xDirection=0;
+    } else if(e.getKeyChar() == 'w' ){
+      System.out.println("up");
+      duber.yDirection=0;
+    }  //note - would be better to make player class and pass in map, test movement in there
+      
+  }
+    
   } //end of keyboard listener
 
   // -----------  Inner class for the keyboard listener - This detects mouse movement & clicks and runs the corresponding methods 
@@ -143,6 +160,7 @@ class Map extends JFrame {
     }
 
     public void mousePressed(MouseEvent e) {
+      
     }
 
     public void mouseReleased(MouseEvent e) {
