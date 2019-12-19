@@ -1,5 +1,3 @@
-//NOT COMPLETE//
-
 import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
 import java.awt.Image;
@@ -8,10 +6,20 @@ import java.io.File;
 import java.awt.Graphics;
 import java.awt.Color;
 
+//Keyboard imports
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 class Human extends Mammal {
+  
+  
   BufferedImage sprite;
   Human(int xCord, int yCord, int health, int damage, int speed) {
     super(xCord, yCord, health, damage, speed);
+    loadSprite();
+    eWidth = sprite.getWidth();
+    eHeight = sprite.getHeight();
+    hitbox = new Rectangle(xCord, yCord, eWidth, eHeight);
   }
 
   public void loadSprite() {
@@ -20,26 +28,46 @@ class Human extends Mammal {
     } catch(Exception e) { System.out.println("Error Loading Sprite...");};
   }
   
-  public void spawn(Graphics g) {
+  public void draw(Graphics g) {
+    g.drawImage(sprite, xCord, yCord, null);
     g.setColor(Color.RED);
-    g.drawRect(50, 50, 15, 15);
+    g.drawRect(xCord, yCord, eWidth, eHeight);
   }
   
 
   @Override
   public void move() {
-    hitbox.setLocation((int)hitbox.getX() + this.xDirection, (int)hitbox.getY() + this.yDirection);
+    //hitbox.setLocation((int)hitbox.getX() + this.xDirection, (int)hitbox.getY() + this.yDirection);
     this.xCord += this.xDirection;
     this.yCord += this.yDirection;
   }
   
   public void up(){
-    this.xCord += 1;
-    System.out.print(xCord);
+    this.yDirection = -5;
+    this.xDirection = 0;
+    move();
   }
+  public void down(){
+    this.yDirection = 5;
+    this.xDirection = 0;
+     move();
+  }
+  public void right(){
+    this.xDirection = 5;
+    this.yDirection = 0;
+      move();
+  }
+  public void left(){
+    this.xDirection = -5;
+    this.yDirection = 0;
+      move();
+  }
+
   
+    
   public void attack() {
     
   }
   
 }
+
