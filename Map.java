@@ -20,6 +20,7 @@ class Map extends JFrame {
   static double x, y;
   private int[][] map;
   static GamePanel gamePanel;
+  Zombie zombie = new Zombie(100, 100, 100, 50, 1);
 
   Map(String title, int[][] map2) {
 
@@ -85,7 +86,6 @@ class Map extends JFrame {
       setDoubleBuffered(true);
       //g.setColor(Color.BLUE); //There are many graphics commands that Java can use
       //g.fillRect((int)x, (int)y, 50, 50); //notice the x,y variables that we control from our animate method
-
       for(int i = 0; i < 25; i++) {
         for(int j = 0; j < 25; j++) {
           if(map[i][j] == 1) {
@@ -97,6 +97,26 @@ class Map extends JFrame {
           }
         }
       }
+      zombie.draw(g);
+      if ((zombie.xCord >= 100) && (zombie.yCord >= 500)) {
+      zombie.xDirection = -zombie.speed;
+      zombie.yDirection = -zombie.speed;
+      zombie.move();
+    } else if ((zombie.xCord <= 100) && (zombie.yCord >= 500)) {
+      zombie.xDirection = zombie.speed;
+      zombie.yDirection = -zombie.speed;
+      zombie.move();
+    } else if ((zombie.xCord <= 100) && (zombie.yCord <= 500)) {
+      zombie.xDirection = zombie.speed;
+      zombie.yDirection = zombie.speed;
+      zombie.move();
+    } else if ((zombie.xCord >= 100) && (zombie.yCord <= 500)) {
+      zombie.xDirection = -zombie.speed;
+      zombie.yDirection = zombie.speed;
+      zombie.move();
+    } else if ((zombie.xCord == 100) && (zombie.yCord == 500)) {
+      zombie.attack();
+    }
     }
   }
 
