@@ -37,37 +37,14 @@ class Human extends Mammal {
 
   @Override
   public void move() {
-    //hitbox.setLocation((int)hitbox.getX() + this.xDirection, (int)hitbox.getY() + this.yDirection);
+    hitbox.setLocation((int)hitbox.getX() + this.xDirection, (int)hitbox.getY() + this.yDirection);
     this.xCord += this.xDirection;
     this.yCord += this.yDirection;
   }
   
-  public void up(){
-    this.yDirection = -5;
-    this.xDirection = 0;
-    move();
-  }
-  public void down(){
-    this.yDirection = 5;
-    this.xDirection = 0;
-     move();
-  }
-  public void right(){
-    this.xDirection = 5;
-    this.yDirection = 0;
-      move();
-  }
-  public void left(){
-    this.xDirection = -5;
-    this.yDirection = 0;
-      move();
-  }
-
-  
-    
+      
   public void attack() {
     
   }
   
 }
-
