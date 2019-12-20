@@ -1,20 +1,38 @@
-import java.util.Random;
-public class Main {
-  public static void main(String[] args) {
-    Random random = new Random();
+import java.awt.Rectangle;
+import java.awt.Graphics;
 
-    int[][] map = new int[25][25];
-    for(int i = 0; i < 25; i++) {
-      for(int j = 0; j < 25; j++) {
-        int choice = random.nextInt(100)+1;
-        if(choice < 95) map[i][j] = 1;
-        else map[i][j] = 2;
-      }
-    }
+abstract class Mammal {
+  private int health, speed;
+  public int xCord, yCord, xDirection, yDirection, eWidth, eHeight, damage;
+  public Rectangle hitbox;
 
-    Map panel = new Map("Duber\'s Revenge", map);
-    while(true) {
-      panel.refresh();
-    }
+  //constructor
+  Mammal(int xCord, int yCord, int health, int damage, int speed) {
+    this.xCord = xCord;
+    this.yCord = yCord;
+    this.xDirection = 0;
+    this.yDirection = 0;
+    this.health = health;
+    this.damage = damage;
+    this.speed = speed;
+  }
+
+  //move method
+  abstract void move();
+
+  public void setHealth(int health) {
+    this.health = health;
+  }
+
+  public int getHealth() {
+    return this.health;
+  }
+
+  public void setSpeed(int speed) {
+    this.speed = speed;
+  }
+
+  public int getSpeed() {
+    return this.speed;
   }
 }
