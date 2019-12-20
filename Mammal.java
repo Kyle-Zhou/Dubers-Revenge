@@ -1,26 +1,20 @@
-import java.awt.Rectangle;
-import java.awt.Graphics;
+import java.util.Random;
+public class Main {
+  public static void main(String[] args) {
+    Random random = new Random();
 
-abstract class Mammal {
+    int[][] map = new int[25][25];
+    for(int i = 0; i < 25; i++) {
+      for(int j = 0; j < 25; j++) {
+        int choice = random.nextInt(100)+1;
+        if(choice < 95) map[i][j] = 1;
+        else map[i][j] = 2;
+      }
+    }
 
-public int xCord, yCord, xDirection, yDirection, eWidth, eHeight, health, damage, speed;
-  public Rectangle hitbox;
-
-  //constructor
-  Mammal(int xCord, int yCord, int health, int damage, int speed) {
-    this.xCord = xCord;
-    this.yCord = yCord;
-    this.xDirection = 0;
-    this.yDirection = 0;
-    this.health = health;
-    this.damage = damage;
-    this.speed = speed;
-  }
-
-  //move method
-  abstract void move();
-
-  public void attack() {
-
+    Map panel = new Map("Duber\'s Revenge", map);
+    while(true) {
+      panel.refresh();
+    }
   }
 }
