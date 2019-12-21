@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 
 class Zombie extends Mammal {
+  private int cooldown;
   BufferedImage sprite;
   
   Zombie(int xCord, int yCord, int health, int damage, int speed) {
@@ -29,12 +30,35 @@ class Zombie extends Mammal {
     g.drawRect(xCord, yCord, eWidth, eHeight);
   }
   
-  public void move() {
+  public void move(Human duber) {
+    if ((xCord >= duber.xCord) && (yCord >= duber.yCord)) {
+      xDirection = -(getSpeed());
+      yDirection = -(getSpeed());
+    } else if ((xCord <= duber.xCord) && (yCord >= duber.yCord)) {
+      xDirection = getSpeed();
+      yDirection = -(getSpeed());
+    } else if ((xCord <= duber.xCord) && (yCord <= duber.yCord)) {
+      xDirection = getSpeed();
+      yDirection = getSpeed();
+    } else if ((xCord >= duber.xCord) && (yCord <= duber.yCord)) {
+      xDirection = -(getSpeed());
+      yDirection = getSpeed();
+    }
     hitbox.setLocation((int)hitbox.getX() + this.xDirection, (int)hitbox.getY() + this.yDirection);
     this.xCord += this.xDirection;
     this.yCord += this.yDirection;
   }
   
-  public void attack() {
+  public void setCooldown(int cooldown) {
+    this.cooldown = cooldown;
+  }
+  
+  public int getCooldown() {
+    return cooldown;
+  }
+  
+  public void attack(Human duber) {
+    cooldown = 100;
+    duber.setHealth(duber.getHealth() - damage);
   }
 }
