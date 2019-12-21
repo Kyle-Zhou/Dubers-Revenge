@@ -15,12 +15,11 @@ import java.awt.event.MouseEvent;
 
 public class MyMouseListener implements MouseListener{
 
+  private Human duber;
+  MyMouseListener(Human duber){
+    this.duber=duber;
+  }  
   
-  Human duber = new Human(Toolkit.getDefaultToolkit().getScreenSize().width / 2, 
-                          Toolkit.getDefaultToolkit().getScreenSize().height / 2, 
-                          100, 5, 2);
-  
- 
   public void mouseClicked(MouseEvent e) {
     System.out.println("Mouse Clicked");
     System.out.println("X:"+e.getX() + " y:"+e.getY());
