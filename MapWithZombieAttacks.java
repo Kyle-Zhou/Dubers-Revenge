@@ -16,20 +16,29 @@ import java.awt.event.MouseEvent;
 class Map extends JFrame {
   
   //class variable (non-static)
+  public Mammal[] entities;
+  private Human duber;
+  private Spawner spawner;
   static int maxX, maxY, GridToScreenRatio;
   static double x, y;
   private int[][] map;
   static GamePanel gamePanel;
   
-  Human duber = new Human(Toolkit.getDefaultToolkit().getScreenSize().width / 2, 
-                          Toolkit.getDefaultToolkit().getScreenSize().height / 2, 
-                          100, 5, 2);
-  Zombie zombie = new Zombie(100, 100, 100, 10, 1);
-  
   Map(String title, int[][] map2) {
-    
     super(title);
     map = map2;
+    entities = new Mammal[255];
+    spawner = new Spawner(entities);
+    spawner.spawnHuman(Toolkit.getDefaultToolkit().getScreenSize().width / 2, 
+                       Toolkit.getDefaultToolkit().getScreenSize().height / 2, 
+                       100, 5, 2);
+    int dog = 100; //temporary variable for changing coordinates; REMOVE LATER
+    for (int i = 0; i < 5; i++) { //zombie spawns will not occur here; MOVE LATER
+      spawner.spawnZombie(dog, 200, 100, 10, 1);
+      dog += 75;
+    }
+    entities = spawner.getEntities();
+    duber = ((Human)entities[0]);
     // Set the frame to full screen 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -105,45 +114,37 @@ class Map extends JFrame {
           } 
         }
       }
-      zombie.draw(g);
       
-      if (zombie.getCooldown() > 0) {
-        zombie.setCooldown(zombie.getCooldown() - 1);
+      for (int i = 0; i < entities.length; i++) {
+        if (entities[i] instanceof Zombie) {
+          ((Zombie)entities[i]).draw(g);
+          if (((Zombie)entities[i]).getCooldown() > 0) {
+            ((Zombie)entities[i]).setCooldown(((Zombie)entities[i]).getCooldown() - 1);
+          }
+        }
       }
       
       if (duber != null) {
         duber.draw(g);
         duber.move();
-        if (zombie.hitbox.intersects(duber.hitbox)) {
-          zombie.xDirection = 0;
-          zombie.yDirection = 0;
-          if (zombie.getCooldown() == 0) {
-            zombie.attack(duber);
+        for (int i = 0; i < entities.length; i++) {
+          if (entities[i] instanceof Zombie) {
+            if (entities[i].hitbox.intersects(duber.hitbox)) {
+              entities[i].xDirection = 0;
+              entities[i].yDirection = 0;
+              if (((Zombie)entities[i]).getCooldown() == 0) {
+                ((Zombie)entities[i]).attack(duber);
+              }
+            } else {
+              ((Zombie)entities[i]).move(duber);
+            }
           }
-        } else if ((zombie.xCord >= duber.xCord) && (zombie.yCord >= duber.yCord)) {
-          zombie.xDirection = -zombie.speed;
-          zombie.yDirection = -zombie.speed;
-          zombie.move();
-        } else if ((zombie.xCord <= duber.xCord) && (zombie.yCord >= duber.yCord)) {
-          zombie.xDirection = zombie.speed;
-          zombie.yDirection = -zombie.speed;
-          zombie.move();
-        } else if ((zombie.xCord <= duber.xCord) && (zombie.yCord <= duber.yCord)) {
-          zombie.xDirection = zombie.speed;
-          zombie.yDirection = zombie.speed;
-          zombie.move();
-        } else if ((zombie.xCord >= duber.xCord) && (zombie.yCord <= duber.yCord)) {
-          zombie.xDirection = -zombie.speed;
-          zombie.yDirection = zombie.speed;
-          zombie.move();
         }
-        
-        if (duber.health <= 0) {
+        if (duber.getHealth() <= 0) {
           duber = null;
         }
       }
     }
-    
   }
   
   // -----------  Inner class for the keyboard listener - this detects key presses and runs the corresponding code
@@ -154,30 +155,32 @@ class Map extends JFrame {
     
     public void keyPressed(KeyEvent e) {
       //System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
-      
-      if(e.getKeyChar() == 'a' ){
-        duber.xDirection = -duber.speed;
-      } else if(e.getKeyChar() == 's' ){  //If 'S' is pressed
-        duber.yDirection = duber.speed;
-      } else if(e.getKeyChar() == 'd' ){  //If 'D' is pressed
-        duber.xDirection = duber.speed;
-      } else if(e.getKeyChar() == 'w' ){  //If 'W' is pressed
-        duber.yDirection = -duber.speed;
+      if (duber != null) {
+        if(e.getKeyChar() == 'a'){
+          duber.xDirection = -duber.getSpeed();
+        } else if(e.getKeyChar() == 's' ){  //If 'S' is pressed
+          duber.yDirection = duber.getSpeed();
+        } else if(e.getKeyChar() == 'd' ){  //If 'D' is pressed
+          duber.xDirection = duber.getSpeed();
+        } else if(e.getKeyChar() == 'w' ){  //If 'W' is pressed
+          duber.yDirection = -duber.getSpeed();
+        }
       }
     }
     
     public void keyReleased(KeyEvent e) {
       
-      if(e.getKeyChar() == 'a' ){    //Good time to use a Switch statement
-        duber.xDirection=0;
-      } else if(e.getKeyChar() == 's' ){
-        duber.yDirection=0;
-      } else if(e.getKeyChar() == 'd' ){
-        duber.xDirection=0;
-      } else if(e.getKeyChar() == 'w' ){
-        duber.yDirection=0;
-      }  //note - would be better to make player class and pass in map, test movement in there
-      
+      if (duber != null) {
+        if(e.getKeyChar() == 'a' ){    //Good time to use a Switch statement
+          duber.xDirection=0;
+        } else if(e.getKeyChar() == 's' ){
+          duber.yDirection=0;
+        } else if(e.getKeyChar() == 'd' ){
+          duber.xDirection=0;
+        } else if(e.getKeyChar() == 'w' ){
+          duber.yDirection=0;
+        }  //note - would be better to make player class and pass in map, test movement in there
+      }
     }
     
   } //end of keyboard listener
