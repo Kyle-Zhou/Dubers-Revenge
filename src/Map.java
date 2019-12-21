@@ -2,8 +2,6 @@ import java.util.Random;
 
 class Map {
 
-  //class variable (non-static)
-  static double x, y;
   private int[][] map = new int[25][25];
   
   Map() {
