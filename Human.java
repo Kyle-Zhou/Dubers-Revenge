@@ -6,10 +6,6 @@ import java.io.File;
 import java.awt.Graphics;
 import java.awt.Color;
 
-//Keyboard imports
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 class Human extends Mammal {
   
   
