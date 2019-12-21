@@ -17,9 +17,6 @@ abstract class Mammal {
     this.speed = speed;
   }
 
-  //move method
-  abstract void move();
-
   public void setHealth(int health) {
     this.health = health;
   }
