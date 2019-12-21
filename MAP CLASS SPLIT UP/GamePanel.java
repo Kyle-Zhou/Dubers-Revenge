@@ -23,7 +23,7 @@ class GamePanel extends JPanel {
   
   GamePanel(Human duber) {
     this.duber = duber;
-    addMouseListener(new MyMouseListener());
+    addMouseListener(new MyMouseListener(duber));
     addKeyListener(new MyKeyListener(duber));
   }
 
