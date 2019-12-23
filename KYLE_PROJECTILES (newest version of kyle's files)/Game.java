@@ -31,7 +31,6 @@ class Game extends JFrame {
     duber = ((Human)entities[0]);
     //projectiles = spawner.getProjectiles();
     
-    
     // Set the frame to full screen 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -56,7 +55,6 @@ class Game extends JFrame {
     t.start();
 
   }
-
   
   public void refresh() {
     this.repaint();
@@ -64,7 +62,6 @@ class Game extends JFrame {
 
   //the main gameloop - this is where the game state is updated
   public void animate() {
-
     while(true){
       this.x = (Math.random()*1024);  //update coords
       this.y = (Math.random()*768);
