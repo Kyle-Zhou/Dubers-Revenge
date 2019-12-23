@@ -59,7 +59,6 @@ class GamePanel extends JPanel {
         projectiles[i].draw(g);
       }
     }
-    
 
     if (duber != null) {
       duber.draw(g);
@@ -84,10 +83,6 @@ class GamePanel extends JPanel {
         duber = null;
       }
     }
-          
-
-            
-
       
   }
     
