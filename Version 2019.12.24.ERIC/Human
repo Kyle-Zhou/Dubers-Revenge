@@ -31,8 +31,9 @@ class Human extends Mammal {
     //duber's healthbar
     int duberHealth = getHealth();
     g.setColor(Color.red);
-    int ratio = Toolkit.getDefaultToolkit().getScreenSize().height / 100;
+    int ratio = Toolkit.getDefaultToolkit().getScreenSize().height / 5 / 100;
     g.fillRect(xCord-100, yCord-100, duberHealth*ratio, 20);//not up to scale, you guys change it
+    //add an image of heart that indicates the bar is the healthbar
   }
   
   public void move() {
