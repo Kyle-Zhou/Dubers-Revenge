@@ -1,2 +1,3 @@
 # Dubers-Revenge
-Duber's Revenge
+Isometric/Top down 2D survival/shooting game
+
