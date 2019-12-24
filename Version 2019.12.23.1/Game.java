@@ -1,6 +1,9 @@
 import javax.swing.JFrame;
 import java.awt.Toolkit;
 import java.util.Random;
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
 
 class Game extends JFrame {
 
@@ -19,7 +22,12 @@ class Game extends JFrame {
   Game(String title) {
 
     super(title);
-
+    
+    setCursor(Cursor.getDefaultCursor());
+    Image image = Toolkit.getDefaultToolkit().getImage("CrossHair.png");
+    Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(image , new Point(this.getX(), this.getY()), "img");
+    this.setCursor (c);
+    
     entities = new Mammal[255];
     projectiles = new Projectile[255];
     scroll = new Camera(0, 0);
