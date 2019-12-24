@@ -23,9 +23,8 @@ class Game extends JFrame {
 
     super(title);
     
-    setCursor(Cursor.getDefaultCursor());
-    Image crosshair = Toolkit.getDefaultToolkit().getImage("crosshair.png");
-    Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(crosshair, new Point(this.getX(), this.getY()), "img");
+    cursor();
+    
     entities = new Mammal[255];
     projectiles = new Projectile[255];
     scroll = new Camera(0, 0);
@@ -84,7 +83,14 @@ class Game extends JFrame {
       this.repaint();
     }
   }
-
+  
+  public void cursor(){
+    setCursor(Cursor.getDefaultCursor());
+    Image image = Toolkit.getDefaultToolkit().getImage("CrossHair.png");
+    Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(image , new Point(this.getX(), this.getY()), "img");
+    this.setCursor (c);
+  }
+  
   public void nextWave(int number) {
     waveNum++;
     int range = 75;
