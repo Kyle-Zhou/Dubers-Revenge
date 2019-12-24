@@ -1,6 +1,5 @@
 import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
-import java.awt.Image;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.awt.Graphics;
