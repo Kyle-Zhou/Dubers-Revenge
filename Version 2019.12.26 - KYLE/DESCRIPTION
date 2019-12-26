@@ -1,0 +1,8 @@
+- Derived from eric's code
+
+- Zombie's have health bars
+
+- Zombie's drop cash 
+- Killing zombie's adds to currency counter 
+(these are both bugged; I hypothesize that it has something to do with zombies overlapping but 
+if someone else wants to take a look and fix shit that'd be preferrable )
