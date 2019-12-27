@@ -6,6 +6,8 @@ class Camera {
     this.yCamera = yCamera;
   }
   
+  ig my god ajdnada
+  
   public void follow(Human duber, int xAdjust, int yAdjust) {
     xCamera = -duber.xCentre + xAdjust;
     yCamera = -duber.yCentre + yAdjust;
