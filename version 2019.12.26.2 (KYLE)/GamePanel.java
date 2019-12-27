@@ -16,7 +16,7 @@ class GamePanel extends JPanel {
   private Entity[] entities;
   private Mouse listener;
   private int vitality;
-  private int currency;
+  private static int currency;
   
   Map map = new Map();
   
@@ -29,8 +29,7 @@ class GamePanel extends JPanel {
     south = (Wall)entities[2];
     listener = new Mouse(duber, spawner, scroll);
     addKeyListener(new Keys(duber));
-    vitality = duber.getHealth();
-    
+    vitality = duber.getHealth(); 
   }
   
   public void paintComponent(Graphics g) {
@@ -105,11 +104,14 @@ class GamePanel extends JPanel {
             }
           }
         }
-        if (entities[i] instanceof Cash){
-          (entities[i]).draw(g);
-          if (entities[i].getHitbox().intersects(duber.getHitbox())){
+      }
+      for (int k = 0; k < entities.length; k++){
+        if (entities[k] instanceof Cash){
+          (entities[k]).draw(g);
+          if (entities[k].getHitbox().intersects(duber.getHitbox())){
             currency++;
-            entities[i] = null;
+            System.out.println(currency);
+            entities[k] = null;
           }
         }
       }
@@ -141,6 +143,5 @@ class GamePanel extends JPanel {
     g2d.translate(-scroll.getXCamera(), -scroll.getYCamera());
     
   }
-  
   
 }
