@@ -8,19 +8,6 @@ abstract class Obstacle extends Entity {
   Obstacle(int xCord, int yCord) {
     super(xCord, yCord);
   }
-  
-  Obstacle(int xCord, int yCord, int eWidth, int eHeight) {
-    super(xCord, yCord);
-    super.seteWidth(eWidth);
-    super.seteHeight(eHeight);
-  }
-  
-  Obstacle(int xCord, int yCord, int eWidth, int eHeight, int adjust) {
-    super(xCord, yCord);
-    super.seteWidth(eWidth);
-    super.seteHeight(eHeight);
-    this.adjust = adjust;
-  }
 
   public int getxCord() {
     return super.getxCord();
