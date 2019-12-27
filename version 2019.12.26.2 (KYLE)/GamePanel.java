@@ -110,7 +110,6 @@ class GamePanel extends JPanel {
           (entities[k]).draw(g);
           if (entities[k].getHitbox().intersects(duber.getHitbox())){
             currency++;
-            System.out.println(currency);
             entities[k] = null;
           }
         }
