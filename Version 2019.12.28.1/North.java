@@ -14,7 +14,7 @@ class North extends Wall {
     loadSprite();
     super.seteWidth(sprite.getWidth());
     super.seteHeight(sprite.getHeight());
-    super.setHitbox(new Rectangle(xCord, yCord, super.geteWidth(), 35));
+    super.setHitbox(new Rectangle(xCord, yCord, super.geteWidth(), 100));
     eastHitbox = new Rectangle(super.geteWidth() - 64, yCord, 64, super.geteHeight());
     westHitbox = new Rectangle(xCord, yCord, 64, super.geteHeight());
   }
@@ -28,7 +28,7 @@ class North extends Wall {
   public void draw(Graphics g) {
     g.drawImage(sprite, super.getxCord(), super.getyCord(), null);
     g.setColor(Color.RED);
-    g.drawRect(super.getxCord(), super.getyCord(), super.geteWidth(), 35);
+    g.drawRect(super.getxCord(), super.getyCord(), super.geteWidth(), 100);
     g.drawRect(super.geteWidth() - 64, super.getyCord(), 64, super.geteHeight());
     g.drawRect(super.getxCord(), super.getyCord(), 64, super.geteHeight());
   }
