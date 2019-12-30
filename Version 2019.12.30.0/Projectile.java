@@ -17,10 +17,6 @@ abstract class Projectile extends Entity {
     return speed;
   }
 
-  public Rectangle getHitbox() {
-    return super.getHitbox();
-  }
-
   public float getxDirection() {
     return xDirection;
   }
@@ -47,10 +43,6 @@ abstract class Projectile extends Entity {
 
   public void setSpeed(int speed) {
     this.speed = speed;
-  }
-
-  public void setHitbox(Rectangle hitbox) {
-    super.setHitbox(hitbox);
   }
 
   public void setxDirection(float xDirection) {
