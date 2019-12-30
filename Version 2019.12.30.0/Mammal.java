@@ -30,28 +30,12 @@ abstract class Mammal extends Entity {
     return this.speed;
   }
 
-  public int getxCord() {
-    return super.getxCord();
-  }
-
-  public int getyCord() {
-    return super.getyCord();
-  }
-
   public int getxDirection() {
     return xDirection;
   }
 
   public int getyDirection() {
     return yDirection;
-  }
-
-  public int geteWidth() {
-    return super.geteWidth();
-  }
-
-  public int geteHeight() {
-    return super.geteHeight();
   }
 
   public int getDamage() {
@@ -66,36 +50,12 @@ abstract class Mammal extends Entity {
     return yCentre;
   }
 
-  public Rectangle getHitbox() {
-    return super.getHitbox();
-  }
-
-  public void setHitbox(Rectangle hitbox) {
-    super.setHitbox(hitbox);
-  }
-
-  public void setxCord(int xCord) {
-    super.setxCord(xCord);
-  }
-
-  public void setyCord(int yCord) {
-    super.setyCord(yCord);
-  }
-
   public void setxDirection(int xDirection) {
     this.xDirection = xDirection;
   }
 
   public void setyDirection(int yDirection) {
     this.yDirection = yDirection;
-  }
-
-  public void seteWidth(int eWidth) {
-    super.seteWidth(eWidth);
-  }
-
-  public void seteHeight(int eHeight) {
-    super.seteHeight(eHeight);
   }
 
   public void setDamage(int damage) {
