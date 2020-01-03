@@ -8,7 +8,7 @@ import java.awt.Point;
 class Game extends JFrame {
 
   //class variable (non-static)
-  static int maxX, maxY, GridToScreenRatio;
+  static int maxX, maxY, timer = 1500000;
   static double x, y;
   private static GamePanel gamePanel;
   private Entity[] entities;
@@ -95,12 +95,15 @@ class Game extends JFrame {
     for (int i = 0; i < entities.length; i++){
       if (entities[i] instanceof Zombie) {
         zombiesAlive = true;
+        timer = 1000000;
         hud.setZombieCounter(hud.getZombieCounter()+1);
       }
     }
     if (zombiesAlive == false){
-      int num = random.nextInt(4)+3;//from 1 to 5
-      nextWave(num);
+      if(timer < 0) {
+        int num = random.nextInt(4) + 3;//from 1 to 5
+        nextWave(num);
+      } else timer--; //System.out.println(timer);
     }
   }
   
