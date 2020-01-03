@@ -44,13 +44,16 @@ public class Keys implements KeyListener{
     
     if ((e.getKeyChar() == 'e')) { 
       if (entities[spawner.getCurrentBandage()] instanceof Bandage){
-        hud.setBandageCount(hud.getBandageCount()+1);   ///ADD A CONDITIONAL HERE TO CHECK IF DUBER IS EVEN ON A BANDAID
+      if (entities[spawner.getCurrentBandage()].getHitbox().intersects(duber.getHitbox())){
+        hud.setBandageCount(hud.getBandageCount()+1);   
         entities[spawner.getCurrentBandage()] = null;
+      }
       }
     }
     
     if ((e.getKeyChar() == 'h')) { 
       if (hud.getBandageCount() > 0){
+        hud.setBandageCount(hud.getBandageCount()-1);  
         if (duber.getHealth() + 20 > 100){
           duber.setHealth(100);
         } else {
