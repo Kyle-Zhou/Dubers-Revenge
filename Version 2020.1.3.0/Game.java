@@ -99,7 +99,7 @@ class Game extends JFrame {
       }
     }
     if (zombiesAlive == false){
-      int num = random.nextInt(4)+3;
+      int num = random.nextInt(50)+44;
       nextWave(num);
     }
   }
@@ -108,20 +108,30 @@ class Game extends JFrame {
     hud.setWaveNum(hud.getWaveNum()+1);
     
     for (int i = 0; i < hud.getWaveNum() * number; i++) {
-      int xRange = random.nextInt(maxX*3-200)+100;
-      int yRange = random.nextInt(maxY*3-200)+100;
+      int xRange = random.nextInt(4372)+64;
+      int yRange = random.nextInt(4302)+100;
       int randInt = random.nextInt(2)+1;
-      if (hud.getWaveNum() < 2){
-        spawner.spawnWalker(xRange, yRange, 100, 10, randInt);
-      } else if (hud.getWaveNum() < 6) {
-        int randomZombie = random.nextInt(2)+1;
-        if (randomZombie == 1){
-          spawner.spawnRunner(xRange, yRange, 70, 5, 3);
-        } else if (randomZombie == 2){
-          spawner.spawnWalker(xRange, yRange, 100, 10, 1);
+
+      if (((xRange < (int)-scroll.getXCamera()) && (yRange > (int)-scroll.getYCamera())) || 
+          ((xRange < (int)-scroll.getXCamera()) && (yRange < (int)-scroll.getYCamera())) ||
+          ((xRange > (int)-scroll.getXCamera() + maxX) && (yRange > (int)-scroll.getYCamera())) ||
+          ((xRange > (int)-scroll.getXCamera() + maxX) && (yRange < (int)-scroll.getYCamera())) ||
+          (yRange > (int)-scroll.getYCamera()+maxY)) {
+        
+        if (hud.getWaveNum() < 2){
+          spawner.spawnWalker(xRange, yRange, 100, 10, randInt);
+        } else if (hud.getWaveNum() < 6) {
+          int randomZombie = random.nextInt(2)+1;
+          if (randomZombie == 1){
+            spawner.spawnRunner(xRange, yRange, 70, 5, 3);
+          } else if (randomZombie == 2){
+            spawner.spawnWalker(xRange, yRange, 100, 10, 1);
+          }
+        } else {
+          spawner.spawnWalker(xRange, yRange, 100, 10, 1);        
         }
       } else {
-          spawner.spawnWalker(xRange, yRange, 100, 10, 1);        
+        i--;
       }
     }
   }
