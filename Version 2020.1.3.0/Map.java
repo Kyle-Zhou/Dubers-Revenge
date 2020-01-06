@@ -4,13 +4,13 @@ class Map {
 
   //class variable (non-static)
   static double x, y;
-  private int[][] map = new int[75][75];
+  private int[][] map = new int[125][125];
   
   Map() {
     Random random = new Random();
 
-    for(int i = 0; i < 75; i++) {
-      for(int j = 0; j < 75; j++) {
+    for(int i = 0; i < 125; i++) {
+      for(int j = 0; j < 125; j++) {
         int choice = random.nextInt(100)+1;
         if(choice < 90) {
           map[i][j] = 1;
