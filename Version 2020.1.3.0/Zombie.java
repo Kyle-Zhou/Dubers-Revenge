@@ -69,5 +69,32 @@ abstract class Zombie extends Mammal {
   public void setStartingHealth(int startingHeatlh){
     this.startingHealth = startingHealth;
   }
-
+  
+  public void collision(North north, South south) { //if player hitbox is changed later on, make edits
+    if (super.getHitbox().intersects(north.getHitbox())) {
+      super.setyDirection(0);
+      super.setyCord(100);
+      super.setyCentre(super.getyCord() + (super.geteHeight() / 2));
+      super.getHitbox().setLocation((int)super.getxCord() + super.getxDirection(),
+                                    (int)super.getyCord() + super.getyDirection());
+    } else if (super.getHitbox().intersects(north.getEastHitbox())) {
+      super.setxDirection(0);
+      super.setxCord(4500 - 64 - super.geteWidth());
+      super.setxCentre(super.getxCord() + (super.geteWidth() / 2));
+      super.getHitbox().setLocation((int)super.getxCord() + super.getxDirection(),
+                                    (int)super.getyCord() + super.getyDirection());
+    } else if (super.getHitbox().intersects(south.getHitbox())) { // 81
+      super.setyDirection(0);
+      super.setyCord(4402 - super.geteHeight());
+      super.setyCentre(super.getyCord() + (super.geteHeight() / 2));
+      super.getHitbox().setLocation((int)super.getxCord() + super.getxDirection(),
+                                    (int)super.getyCord() + super.getyDirection());
+    } else if (super.getHitbox().intersects(north.getWestHitbox())) {
+      super.setxDirection(0);
+      super.setxCord(64);
+      super.setxCentre(super.getxCord() + (super.geteWidth() / 2));
+      super.getHitbox().setLocation((int)super.getxCord() + super.getxDirection(),
+                                    (int)super.getyCord() + super.getyDirection());
+    }
+  }
 }
