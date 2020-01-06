@@ -57,14 +57,14 @@ class GamePanel extends JPanel {
     GridToScreenRatio = (maxY) / (map.getMap().length + 1);
     
     g2d.translate(scroll.getXCamera(), scroll.getYCamera());
-    for(int i = 0; i < 75; i++) {
-      for(int j = 0; j < 75; j++) {
+    for(int i = 0; i < 125; i++) {
+      for(int j = 0; j < 125; j++) {
         if(map.getMap()[i][j] == 1) {
-          g.drawImage(tile, j * 60, i * 60, 60, 60, this);
+          g.drawImage(tile, j * 36, i * 36, 36, 36, this);
         } else if (map.getMap()[i][j] == 2){
-          g.drawImage(crackedTile, j * 60, i * 60, 60, 60, this);
+          g.drawImage(crackedTile, j * 36, i * 36, 36, 36, this);
         } else if (map.getMap()[i][j] == 3) {
-          g.drawImage(brokenTile, j * 60, i * 60, 60, 60, this);
+          g.drawImage(brokenTile, j * 36, i * 36, 36, 36, this);
         }
       }
     }
@@ -97,8 +97,10 @@ class GamePanel extends JPanel {
             }
           } else {
             ((Zombie)entities[i]).move(duber, entities);
+            ((Zombie)entities[i]).collision(north, south);
           }
         }
+        
         if (entities[i] instanceof Projectile) {
           ((Projectile)entities[i]).travel(duber, listener.getXCursor(), listener.getYCursor());
               
