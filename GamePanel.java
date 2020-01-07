@@ -46,12 +46,7 @@ class GamePanel extends JPanel {
   public void paintComponent(Graphics g) {
     super.paintComponent(g); //required
     setDoubleBuffered(true);
-
     Graphics2D g2d = (Graphics2D)g;
-
-    Image crackedTile = Toolkit.getDefaultToolkit().getImage("crackedTile.png");
-    Image brokenTile = Toolkit.getDefaultToolkit().getImage("brokenTile.png");
-    Image tile = Toolkit.getDefaultToolkit().getImage("tile.png");
 
     this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
     this.maxX = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -59,14 +54,14 @@ class GamePanel extends JPanel {
     GridToScreenRatio = (maxY) / (map.getMap().length + 1);
 
     g2d.translate(scroll.getXCamera(), scroll.getYCamera());
-    for(int i = 0; i < 75; i++) {
-      for(int j = 0; j < 75; j++) {
+    for(int i = 0; i < 125; i++) {
+      for(int j = 0; j < 125; j++) {
         if(map.getMap()[i][j] == 1) {
-          g.drawImage(tile, j * 60, i * 60, 60, 60, this);
+          g.drawImage(tiles[0], j * 36, i * 36, 36, 36, this);
         } else if (map.getMap()[i][j] == 2){
-          g.drawImage(crackedTile, j * 60, i * 60, 60, 60, this);
+          g.drawImage(tiles[1], j * 36, i * 36, 36, 36, this);
         } else if (map.getMap()[i][j] == 3) {
-          g.drawImage(brokenTile, j * 60, i * 60, 60, 60, this);
+          g.drawImage(tiles[2], j * 36, i * 36, 36, 36, this);
         }
       }
     }
