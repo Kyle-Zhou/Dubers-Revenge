@@ -58,10 +58,10 @@ public class Mouse implements MouseListener, MouseMotionListener {
   }
   
   public int trackX() {
-    return (int)MouseInfo.getPointerInfo().getLocation().getX();
+    return (int)MouseInfo.getPointerInfo().getLocation().getX() - (int)scroll.getXCamera();
   }
   
   public int trackY() {
-    return (int)MouseInfo.getPointerInfo().getLocation().getY();
+    return (int)MouseInfo.getPointerInfo().getLocation().getY() - (int)scroll.getYCamera();
   }
 }
