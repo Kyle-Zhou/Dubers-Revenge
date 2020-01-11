@@ -5,16 +5,21 @@ import java.io.File;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.util.Random;
+import java.awt.Toolkit;
 
 class Shell extends Projectile {
   private BufferedImage sprite;
-  private int spread;
+  private int displaceX, displaceY, maxX, maxY;
+  private double multiplierX, multiplierY;
   private Random random;
+  private boolean initialization;
   
   Shell(int xCord, int yCord, int speed){
     super(xCord, yCord, speed);
     random = new Random();
-    spread = random.nextInt(10 + 10) - 10;
+    maxX = Toolkit.getDefaultToolkit().getScreenSize().width;
+    maxY = Toolkit.getDefaultToolkit().getScreenSize().height;
+    initialization = false;
     loadSprite();
     seteWidth(sprite.getWidth());
     seteHeight(sprite.getHeight());
@@ -34,7 +39,20 @@ class Shell extends Projectile {
   }
   
   public void travel(Human duber, int xCursor, int yCursor) {
-    setAngle((float)Math.atan2(yCursor - duber.getyCentre() + spread, xCursor - duber.getxCentre() + spread));
+    if (initialization == false) {
+      multiplierX = Math.round(((double)(xCursor - duber.getxCentre()) / (double)maxX) * 15);
+      multiplierY = Math.round(((double)(yCursor - duber.getyCentre()) / (double)maxY) * 15);
+      if (multiplierX == 0) {
+        multiplierX = 1;
+      } else if (multiplierY == 0) {
+        multiplierY = 1;
+      }
+      System.out.println(multiplierX);
+      displaceX = (int)(Math.round((random.nextInt(25 + 25) - 25) * multiplierX));
+      displaceY = (int)(Math.round((random.nextInt(25 + 25) - 25) * multiplierY));
+      initialization = true;
+    }
+    setAngle((float)Math.atan2(yCursor - duber.getyCentre() + displaceX, xCursor - duber.getxCentre() + displaceY));
     if (isLimit() == false){
       setxDirection((double)((getSpeed()) * Math.cos(getAngle())));
       setyDirection((double)((getSpeed()) * Math.sin(getAngle())));
