@@ -1,11 +1,9 @@
 class Spawner {
   private static boolean availability;
-  private static int position;
+  private static int position, currentWeapon, currentBandage;
   private static Entity[] entities;
   private static Weapon[] weapons;
   private static Shop shop;
-  private static int currentWeapon;
-  private static int currentBandage;
   
   Spawner(Entity[] entities, Weapon[] weapons, Shop shop) {
     this.entities = entities;
@@ -164,7 +162,7 @@ class Spawner {
     while (availability == false) {
       if (weapons[position] == null) {
         availability = true;
-        weapons[position] = new Pistol(duber.getxCentre(), duber.getyCentre(), 20, 15, 15);
+        weapons[position] = new Shotgun(duber.getxCentre(), duber.getyCentre() - 9, 20, 15, 15);
       } else {
         position++;
       }
