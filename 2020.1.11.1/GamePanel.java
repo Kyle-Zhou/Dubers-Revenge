@@ -94,11 +94,18 @@ class GamePanel extends JPanel {
       g2d.rotate((double)Math.atan2(mouse.trackY() - duber.getyCentre(), mouse.trackX() - duber.getxCentre()), duber.getxCentre(), duber.getyCentre());
       if (spawner.getCurrentWeapon() == 0) {
         if (mouse.trackX() > duber.getxCentre()) {
-          weapons[spawner.getCurrentWeapon()].setDirection(true);
+          weapons[0].setDirection(true);
         } else {
-          weapons[spawner.getCurrentWeapon()].setDirection(false);
+          weapons[0].setDirection(false);
         }
-        weapons[spawner.getCurrentWeapon()].draw(g);
+        weapons[0].draw(g);
+      } else if (spawner.getCurrentWeapon() == 1) {
+        if (mouse.trackX() > duber.getxCentre()) {
+          weapons[1].setDirection(true);
+        } else {
+          weapons[1].setDirection(false);
+        }
+        weapons[1].draw(g);
       }
       g2d.rotate(-((double)Math.atan2(mouse.trackY() - duber.getyCentre(), mouse.trackX() - duber.getxCentre())), duber.getxCentre(), duber.getyCentre());
       
