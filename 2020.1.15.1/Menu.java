@@ -32,7 +32,7 @@ public class Menu extends JFrame{
 
     JPanel mainPanel = new JPanel();
     mainPanel.setLayout(new BorderLayout());
-    mainPanel.setBackground(new Color(0, 0, 0));
+    mainPanel.setBackground(new Color(95, 82, 111));
     mainPanel.setPreferredSize(new Dimension(1024,768));
 
 
