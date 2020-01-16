@@ -47,15 +47,15 @@ public class Menu extends JFrame{
     startButton.setFocusPainted(false);
     startButton.addActionListener(new StartButtonListener());
 
-    /*JPanel bottomPanel = new JPanel();
+    JPanel bottomPanel = new JPanel();
     bottomPanel.setBackground(new Color(0, 0, 0, 0));
-    bottomPanel.add(startButton);*/
+    bottomPanel.add(startButton);
 
     //Create a JButton for the centerPanel
     JLabel startLabel = new JLabel("<HTML><H1><font color='white'>Welome to Duber's Revenge, press Start to play!</H1></HTML>");
 
     //Add all panels to the mainPanel according to border layout
-    mainPanel.add(startButton, BorderLayout.SOUTH);
+    mainPanel.add(bottomPanel, BorderLayout.SOUTH);
     mainPanel.add(startLabel, BorderLayout.CENTER);
 
     //decPanel.add(mainPanel);
