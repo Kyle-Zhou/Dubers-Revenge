@@ -1,9 +1,8 @@
-import javax.swing.JFrame;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
-import java.awt.Cursor;
-import java.awt.Image;
-import java.awt.Point;
 
 class Game extends JFrame {
 
@@ -80,13 +79,16 @@ class Game extends JFrame {
     t.start();
   }
 
-
   public void refresh() {
     this.repaint();
     scroll.xFollow(duber, Toolkit.getDefaultToolkit().getScreenSize().width / 2);
     scroll.yFollow(duber, Toolkit.getDefaultToolkit().getScreenSize().height / 2);
     hud.update(scroll, duber);
 
+  }
+
+  public void refresh2() {
+    this.repaint();
   }
 
   //the main gameloop - this is where the game state is updated
@@ -99,10 +101,48 @@ class Game extends JFrame {
     }
   }
 
-  public void cursor(){
+  public void cursor() {
     setCursor(Cursor.getDefaultCursor());
     Image crosshair = Toolkit.getDefaultToolkit().getImage("crosshair.png");
     Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(crosshair, new Point(this.getX(), this.getY()), "img");
     this.setCursor(c);
+  }
+
+  public void ending() {
+    ImageIcon ta =new ImageIcon("tryAgain.png");
+
+    Ending panel = new Ending();
+    panel.setLayout(new BorderLayout());
+    panel.setBackground(new Color(0, 0, 0, 0));
+    panel.setPreferredSize(new Dimension(1024,768));
+
+    JButton end = new JButton(ta);
+    end.setBackground(new Color(0, 0, 0));
+    //end.setRolloverIcon(new ImageIcon("startbuttonpressed.png"));
+    end.setBorder(BorderFactory.createEmptyBorder());
+    end.setFocusPainted(false);
+    end.addActionListener(new ButtonListener());
+
+    JPanel bottom = new JPanel();
+    bottom.setBackground(new Color(0, 0, 0, 0));
+    bottom.add(end);
+
+    JLabel label = new JLabel("<HTML><H1><font color='white'>You Died, Try Again?</H1></HTML>");
+
+    panel.add(bottom, BorderLayout.SOUTH);
+    panel.add(label, BorderLayout.CENTER);
+    this.setVisible(true);
+
+    this.add(panel);
+    System.out.println("JPanel works");
+  }
+
+  class ButtonListener implements ActionListener {
+    public void actionPerformed(ActionEvent event) {
+      Main.end = false;
+      Main.menu = true;
+      Main.running = true;
+      dispose();
+    }
   }
 }

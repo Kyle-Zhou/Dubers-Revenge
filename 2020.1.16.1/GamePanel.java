@@ -53,9 +53,8 @@ class GamePanel extends JPanel {
     
     this.setSize(Toolkit.getDefaultToolkit().getScreenSize()); 
     this.maxX = Toolkit.getDefaultToolkit().getScreenSize().width; 
-    this.maxY = Toolkit.getDefaultToolkit().getScreenSize().height; 
-    
-    
+    this.maxY = Toolkit.getDefaultToolkit().getScreenSize().height;
+
     //tickCounter.update();
     g2d.translate(scroll.getXCamera(), scroll.getYCamera()); 
     g.drawImage(floor, 0, 0, this); 
@@ -121,27 +120,6 @@ class GamePanel extends JPanel {
           weapons[1].setDirection(false);
         }
         weapons[1].draw(g);
-      } else if (spawner.getCurrentWeapon() == 2) {
-        if (mouse.trackX() > duber.getxCentre()) {
-          weapons[2].setDirection(true);
-        } else {
-          weapons[2].setDirection(false);
-        }
-        weapons[2].draw(g);
-      } else if (spawner.getCurrentWeapon() == 3) {
-        if (mouse.trackX() > duber.getxCentre()) {
-          weapons[3].setDirection(true);
-        } else {
-          weapons[3].setDirection(false);
-        }
-        weapons[3].draw(g);
-      } else {
-        if (mouse.trackX() > duber.getxCentre()) {
-          weapons[4].setDirection(true);
-        } else {
-          weapons[4].setDirection(false);
-        }
-        weapons[4].draw(g);
       }
       g2d.rotate(-((double)Math.atan2(mouse.trackY() - duber.getyCentre(), mouse.trackX() - duber.getxCentre())), duber.getxCentre(), duber.getyCentre());
       
@@ -169,13 +147,11 @@ class GamePanel extends JPanel {
           for (int j = 0; j < entities.length; j++) { 
             if ((entities[j] instanceof Zombie) && (entities[i].getHitbox().intersects(entities[j].getHitbox()))) { 
               ((Zombie)entities[j]).setHealth(((Zombie)entities[j]).getHealth() - weapons[spawner.getCurrentWeapon()].getDamage()); 
-              if (entities[i] instanceof Rocket) {
-                spawner.explode(entities[i].getxCord() - 140, entities[i].getyCord() - 140);
-                entities[i] = null;
-              } else if (!(entities[i] instanceof Flame)) {
+              if (!(entities[i] instanceof Flame)) {
                 entities[i] = null;
               }
               if (((Zombie)entities[j]).getHealth() <= 0) { 
+                
                 int randInt = random.nextInt(2)+1; 
                 if (randInt == 1){ 
                   spawner.spawnCash(((Zombie)entities[j]).getxCentre(), ((Zombie)entities[j]).getyCentre()); 
@@ -213,28 +189,6 @@ class GamePanel extends JPanel {
           } 
         } 
         
-        if (entities[i] instanceof Explosion) {
-          entities[i].draw(g);
-          ((Explosion)entities[i]).update();
-          for (int j = 0; j < entities.length; j++) { 
-            if ((entities[j] instanceof Zombie) && (entities[i].getHitbox().intersects(entities[j].getHitbox()))) { 
-              ((Zombie)entities[j]).setHealth(((Zombie)entities[j]).getHealth() - 2); 
-              if (((Zombie)entities[j]).getHealth() <= 0) { 
-                int randInt = random.nextInt(2)+1; 
-                if (randInt == 1){ 
-                  spawner.spawnCash(((Zombie)entities[j]).getxCentre(), ((Zombie)entities[j]).getyCentre()); 
-                } else if (randInt == 2){ 
-                  spawner.spawnBandage(((Zombie)entities[j]).getxCentre(), ((Zombie)entities[j]).getyCentre()); 
-                }
-                entities[j] = null;
-              }
-            }
-          }
-          if (((Explosion)entities[i]).getSprite() > 69) {
-            entities[i] = null;
-          }
-        }
-        
         if (entities[i] instanceof Cash){ 
           (entities[i]).draw(g); 
           if (entities[i].getHitbox().intersects(duber.getHitbox())){ 
@@ -258,7 +212,6 @@ class GamePanel extends JPanel {
       
       south.draw(g); 
       
-      g2d.translate(-scroll.getXCamera(), -scroll.getYCamera()); 
       hud.draw(g, duber, entities, shop); 
       //if (hud.getShopHitbox().contains(mouse.trackX(), mouse.trackY())){
       if (hud.getShopHitbox().contains(mouse.trackX(), mouse.trackY())){
@@ -269,14 +222,14 @@ class GamePanel extends JPanel {
         duber.setMoveLock(true); 
         weapons[0].setShootingLock(true);
       } 
-      g2d.translate(scroll.getXCamera(), scroll.getYCamera()); 
       
-      g2d.translate(-scroll.getXCamera(), -scroll.getYCamera()); 
-      
+      g2d.translate(-scroll.getXCamera(), -scroll.getYCamera());
+
       if (duber.getHealth() <= 0) {
         duber = null;
         entities[0] = null;
         Main.running = false;
+        Main.end = true;
       }
       
     } 
@@ -285,36 +238,33 @@ class GamePanel extends JPanel {
   
   public void zombieWave(){ 
     zombiesAlive = false; 
-
-    if (hud.getWaveNum() == 0) {
-      int num = random.nextInt(10)+1; 
-      nextWave(num);
-    }
-
+    
     for (int i = 0; i < entities.length; i++){ 
       if (entities[i] instanceof Zombie) { 
         zombiesAlive = true; 
       } 
     } 
-
+    
     if (zombiesAlive == false) { 
-
+      
+      if (hud.getWaveNum() == 0) {
+        int num = random.nextInt(10)+1; 
+        nextWave(num); 
+      }
       if (gracePeriod == false){
         counter.setGracePeriodTime(System.currentTimeMillis());
         System.out.println(counter.getGracePeriodTime());
         gracePeriod = true;
       }
       long time = 5000;
-      if (counter.getGracePeriodTime() != 0){
-        if (System.currentTimeMillis() >= time + counter.getGracePeriodTime()) {
-          System.out.println("works");
-          gracePeriod = false;
-          int num = random.nextInt(hud.getWaveNum()*8+1)+10; 
-          nextWave(num); 
-        }
-      } 
-    }
-  }
+      if (System.currentTimeMillis() >= time + counter.getGracePeriodTime()) {
+                System.out.println("works");
+        gracePeriod = false;
+        int num = random.nextInt(hud.getWaveNum()*8+1)+10; 
+        nextWave(num); 
+      }
+    } 
+  } 
   
   public void nextWave(int number) { 
     hud.setWaveNum(hud.getWaveNum()+1); 
