@@ -19,8 +19,8 @@ class MedKit extends Entity {
   
   public void loadSprite() {
     try {
-      sprite = ImageIO.read(new File("pill.png"));
-    } catch(Exception e) { System.out.println("Error Loading Sprite...");};
+      sprite = ImageIO.read(new File("medkit.png"));
+    } catch(Exception e) { System.out.println("Error Loading 'medkit.png'...");};
   }
   
   public void draw(Graphics g) {
