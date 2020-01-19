@@ -246,10 +246,10 @@ class GamePanel extends JPanel {
     //}else {
       //g.drawString("Game Over", duber.getxCord(), duber.getyCord());
     if(!Main.running) {//NOT WORKING---------------------------------------------------------------------
-      if (mouse.trackX() > duber.getxCord() && mouse.trackY() > duber.getyCord()+100 &&
+      /*if (mouse.trackX() > duber.getxCord() && mouse.trackY() > duber.getyCord()+100 &&
             mouse.trackX() < duber.getxCord()+340 && mouse.trackY() < duber.getyCord()+154)
       g.drawImage(quit2, duber.getxCord(), duber.getyCord()+100, null);
-      else g.drawImage(quit, duber.getxCord(), duber.getyCord()+100, null);
+      else g.drawImage(quit, duber.getxCord(), duber.getyCord()+100, null);*/
     }
     
   } 
