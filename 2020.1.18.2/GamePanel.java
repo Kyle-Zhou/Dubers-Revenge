@@ -314,10 +314,10 @@ class GamePanel extends JPanel {
           } else if (randInt == 2){ 
             spawner.spawnBandage(((Zombie)entities[i]).getxCentre(), ((Zombie)entities[i]).getyCentre()); 
           }
+          if (entities[i] instanceof Bloated) {
+            spawner.implode(((Zombie)entities[i]).getxCentre() - 150, ((Zombie)entities[i]).getyCentre() - 150);
+          }
           entities[i] = null;
-        }
-        if (entities[i] instanceof Bloated) {
-          spawner.implode(((Zombie)entities[i]).getxCentre() - 150, ((Zombie)entities[i]).getyCentre() - 150);
         }
       }
     }
