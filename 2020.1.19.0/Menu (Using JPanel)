@@ -1,0 +1,47 @@
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
+
+class Menu extends JFrame {
+  public Menu() {
+    setBak(); //Get image (set background)
+    Container c = getContentPane(); //Get JFrame Pane
+    JPanel bottomPanel = new JPanel(); //Create JPanel
+    bottomPanel.setBackground(new Color(0, 0, 0, 0));
+    bottomPanel.setPreferredSize(new Dimension(340, 54));
+
+    bottomPanel.setOpaque(false); //Set to transparent background
+    ImageIcon sb = new ImageIcon("start.png");
+    JButton startButton = new JButton(sb);
+    startButton.setBorder(BorderFactory.createEmptyBorder());
+    startButton.addActionListener(new Menu.StartButtonListener());
+    bottomPanel.add(startButton);
+    c.add(bottomPanel, BorderLayout.SOUTH);
+    setSize(1024, 768);
+    setVisible(true);
+  }
+
+  public void refresh() {
+    this.repaint();
+  }
+
+  public void setBak() {
+    ((JPanel) this.getContentPane()).setOpaque(false);
+    ImageIcon img = new ImageIcon("a1.png");
+    JLabel background = new JLabel(img);
+    this.getLayeredPane().add(background, new Integer(Integer.MIN_VALUE));
+    background.setBounds(0, 0, img.getIconWidth(), img.getIconHeight());
+  }
+
+  class StartButtonListener implements ActionListener {  //this is the required class definition
+    public void actionPerformed(ActionEvent event) {
+      Main.game = new Game("Duber\'s Revenge"); //create a new FunkyFrame (another file that extends JFrame)
+      Main.menu = false;
+      Main.running = true;
+      dispose();
+      //System.out.println("Starting new Game");
+    }
+  }
+}
