@@ -9,6 +9,7 @@ class Spawner {
     this.entities = entities;
     this.weapons = weapons;
     this.shop = shop;
+    this.currentWeapon = 0;
   }
   
   public static void spawnHuman(int xCord, int yCord, int health, int damage, int speed) {
