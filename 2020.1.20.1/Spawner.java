@@ -320,7 +320,7 @@ class Spawner {
   }
   
   public static void addFlamethrower(Human duber) {
-    weapons[4] = new Flamethrower(duber.getxCentre(), duber.getyCentre() - 8, 10, 200, 100, 3000);
+    weapons[4] = new Flamethrower(duber.getxCentre(), duber.getyCentre() - 8, 10, 20, 10, 3000);
   }
   
   public void setCurrentBandage(int currentBandage){
