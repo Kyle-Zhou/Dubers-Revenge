@@ -16,6 +16,7 @@ import javax.swing.BorderFactory;
  * [Menu.java]
  * The Main Menu page of the project. Consists of Play, Instructions/Tutorial, and Quit
  * @author Eric Miao
+ Jan 20, 2020
  **/
 class Menu extends JFrame{ //Frame for Menu Screen
 
