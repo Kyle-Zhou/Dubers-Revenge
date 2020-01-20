@@ -12,23 +12,25 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.BorderFactory;
 
-/*
-* Main.java
-* Editor: Eric Miao
-* January 20, 2020
- */
-
-class Menu extends JFrame { //Frame for Menu Screen
+/**
+ * [Menu.java]
+ * The Main Menu page of the project. Consists of Play, Instructions/Tutorial, and Quit
+ * @author Eric Miao
+ **/
+class Menu extends JFrame{ //Frame for Menu Screen
 
   JFrame frame;
 
-  public Menu() {
+  /**Menu constructor
+   * The constructor for Menu, consists Play, Instructions, and Quit button with a beautiful background
+   */
+  public Menu(){
     frame = this;
     setBack(); //Get image (set background)
 
     Container c = getContentPane(); //Get JFrame Pane
 
-    //start button
+    //Start Button
     JPanel startPanel = new JPanel(); //Create JPanel
     startPanel.setPreferredSize(new Dimension(340, 54)); //set Size
     startPanel.setOpaque(false); //Set to transparent background
@@ -40,7 +42,7 @@ class Menu extends JFrame { //Frame for Menu Screen
     startButton.addActionListener(new StartButtonListener()); //Button Listener
     startPanel.add(startButton);
 
-    //instructions button
+    //Instructions Button
     JPanel insPanel = new JPanel(); //Create JPanel
     insPanel.setPreferredSize(new Dimension(340, 54)); //set Size
     insPanel.setOpaque(false); //Set to transparent background
@@ -52,7 +54,7 @@ class Menu extends JFrame { //Frame for Menu Screen
     insButton.addActionListener(new InstButtonListener()); //Button Listener
     insPanel.add(insButton);
 
-    //Quit
+    //Quit Button
     JPanel qPanel = new JPanel(); //Create JPanel
     qPanel.setPreferredSize(new Dimension(300, 54)); //set Size
     qPanel.setOpaque(false); //Set to transparent background
@@ -76,11 +78,17 @@ class Menu extends JFrame { //Frame for Menu Screen
     setVisible(true);
   }
 
-  public void refresh() {
+  /**refresh
+   * A method that repaints the current JFrame
+   */
+  public void refresh(){
     this.repaint();
   }
 
-  public void setBack() {
+  /**setBack
+   * A method that sets the background of the Panel, used in class constructor
+   */
+  public void setBack(){
     ((JPanel) this.getContentPane()).setOpaque(false);
     ImageIcon img = new ImageIcon("a1.png");
     JLabel background = new JLabel(img);
@@ -88,9 +96,11 @@ class Menu extends JFrame { //Frame for Menu Screen
     background.setBounds(0, 0, img.getIconWidth(), img.getIconHeight());
   }
 
-
-  class StartButtonListener implements ActionListener { // necessary START button Listener
-    public void actionPerformed(ActionEvent event) {
+  /**StartButtonListener inner Class
+   * Necessary inner class for the Start Button Action Listener
+   */
+  class StartButtonListener implements ActionListener{ // necessary START button Listener
+    public void actionPerformed(ActionEvent event){
       Main.menu = false;
       Main.end = false;
       Main.running = true;
@@ -99,8 +109,11 @@ class Menu extends JFrame { //Frame for Menu Screen
     }
   }
 
-  class InstButtonListener implements ActionListener { // necessary Instructions button Listener
-    public void actionPerformed(ActionEvent event) {
+  /**InstButtonListener inner Class
+   * Necessary inner class for the Instructions Button Action Listener
+   */
+  class InstButtonListener implements ActionListener{ // necessary Instructions button Listener
+    public void actionPerformed(ActionEvent event){
       System.out.println("Displays Instructions");
       JLabel jlabel = new JLabel(); // create JLabel for the image
       ImageIcon img = new ImageIcon("instructions.png");
@@ -114,8 +127,11 @@ class Menu extends JFrame { //Frame for Menu Screen
     }
   }
 
-  class QButtonListener implements ActionListener { // necessary QUIT button Listener
-    public void actionPerformed(ActionEvent event) {
+  /**QButtonListener inner Class
+   * Necessary inner class for the Quit Button Action Listener
+   */
+  class QButtonListener implements ActionListener{ // necessary QUIT button Listener
+    public void actionPerformed(ActionEvent event){
       System.exit(0); //exits program
     }
   }
