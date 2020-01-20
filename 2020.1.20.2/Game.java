@@ -44,10 +44,10 @@ class Game extends JFrame {
     entities = new Entity[2048];
     weapons = new Weapon[5];
     spawner = new Spawner(entities, weapons, shop);
-    scroll = new Camera(maxX, maxY);    
-    hud = new HeadUpDisplay(scroll, maxX, maxY, spawner, shop, weapons, counter);
-    shop = new Shop(maxX, maxY, scroll, hud);
+    scroll = new Camera(maxX, maxY);
     counter = new Counter();
+    shop = new Shop(maxX, maxY, scroll, hud);
+    hud = new HeadUpDisplay(scroll, maxX, maxY, spawner, shop, weapons, counter);
     spawner.spawnHuman(680, 150, 100, 25, 3);
     spawner.spawnNorth(0, 0);
     spawner.spawnSouth(64, 4500 - 163);
