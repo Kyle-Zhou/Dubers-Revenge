@@ -7,12 +7,12 @@
   public void zombieWave(Graphics g){ 
     zombiesAlive = false; 
     
-    if (hud.getWaveNum() == 0) {
+    if (hud.getWaveNum() == 0) { 
       int num = random.nextInt(10)+1; 
       nextWave(num);
     }
     
-    for (int i = 0; i < entities.length; i++){ 
+    for (int i = 0; i < entities.length; i++) { 
       if (entities[i] instanceof Zombie) { 
         zombiesAlive = true; 
       } 
@@ -20,13 +20,13 @@
     
     if (zombiesAlive == false) { 
       if (gracePeriod == false) {
-        counter.setGracePeriodTime(System.currentTimeMillis());
-        gracePeriod = true;
+        counter.setGracePeriodTime(System.currentTimeMillis()); //Set the beginning of grace period to the current time
+        gracePeriod = true; //prevent this condition from being checked next refresh
       }
-      long time = 10000;
-      if (counter.getGracePeriodTime() != 0){
-        if (counter.getGracePeriodTime()+10000 <= System.currentTimeMillis()) {
-          gracePeriod = false;
+      
+      if (counter.getGracePeriodTime() != 0) { //if grace period time has been set
+        if (counter.getGracePeriodTime() + 15000 <= System.currentTimeMillis()) { //grace period equals 15 seconds
+          gracePeriod = false; 
           int num = random.nextInt(hud.getWaveNum()*8+1)+10; 
           nextWave(num); 
         }
@@ -40,17 +40,20 @@
   * spawns random zombie types
   */
   public void nextWave(int number) { 
+    
     hud.setWaveNum(hud.getWaveNum()+1); 
     for (int i = 0; i < number; i++) { 
       int xRange = random.nextInt(4372)+64; 
       int yRange = random.nextInt(4302)+100; 
       int randInt = random.nextInt(2)+1; 
       
+      //prevents zombies spawning on screen
       if (((xRange < (int)-scroll.getXCamera()) && (yRange > (int)-scroll.getYCamera())) || 
           ((xRange < (int)-scroll.getXCamera()) && (yRange < (int)-scroll.getYCamera())) || 
           ((xRange > (int)-scroll.getXCamera() + maxX) && (yRange > (int)-scroll.getYCamera())) || 
           ((xRange > (int)-scroll.getXCamera() + maxX) && (yRange < (int)-scroll.getYCamera())) || 
           (yRange > (int)-scroll.getYCamera()+maxY)) { 
+        
         int randomZombie = random.nextInt(4); 
         if (randomZombie == 0){
           spawner.spawnWalker(xRange, yRange, 100, 10, 1); 
