@@ -308,19 +308,19 @@ class Spawner {
   }
   
   public static void addShotgun(Human duber) {
-    weapons[1] = new Shotgun(duber.getxCentre(), duber.getyCentre() - 9, 20, 16, 8, 3000);
+    weapons[1] = new Shotgun(duber.getxCentre(), duber.getyCentre() - 9, 20, 20, 10, 4000);
   }
   
   public static void addMachinegun(Human duber) {
-    weapons[2] = new Machinegun(duber.getxCentre(), duber.getyCentre() - 11, 15, 60, 30, 3000);
+    weapons[2] = new Machinegun(duber.getxCentre(), duber.getyCentre() - 11, 15, 200, 50, 5000);
   }
   
   public static void addRocketLauncher(Human duber) {
-    weapons[3] = new RocketLauncher(duber.getxCentre() - 40, duber.getyCentre() - 15, 70, 2, 2, 3000);
+    weapons[3] = new RocketLauncher(duber.getxCentre() - 40, duber.getyCentre() - 15, 70, 9, 1, 4000);
   }
   
   public static void addFlamethrower(Human duber) {
-    weapons[4] = new Flamethrower(duber.getxCentre(), duber.getyCentre() - 8, 10, 20, 10, 3000);
+    weapons[4] = new Flamethrower(duber.getxCentre(), duber.getyCentre() - 8, 10, 9, 1, 1000);
   }
   
   public void setCurrentBandage(int currentBandage){
